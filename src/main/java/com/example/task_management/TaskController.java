@@ -22,17 +22,22 @@ public class TaskController {
         return taskRepository.save(task);
     }
 
+    @GetMapping("/{id}")
+    public Task getTaskById(@PathVariable String id) {
+        return taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
+    }
+
     @PutMapping("/{id}")
     public Task updateTask(@PathVariable String id, @RequestBody Task taskDetails) {
         Task task = taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
-        task.setTitle(taskDetails.getTitle());
+        task.setName(taskDetails.getName());
         task.setDescription(taskDetails.getDescription());
-        task.setCompleted(taskDetails.isCompleted());
         return taskRepository.save(task);
     }
 
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable String id) {
-        taskRepository.deleteById(id);
+        Task task = taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
+        taskRepository.delete(task);
     }
 }
