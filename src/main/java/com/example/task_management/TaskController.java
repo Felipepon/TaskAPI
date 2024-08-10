@@ -32,6 +32,7 @@ public class TaskController {
         Task task = taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
         task.setName(taskDetails.getName());
         task.setDescription(taskDetails.getDescription());
+        task.setCompleted(taskDetails.isCompleted()); 
         return taskRepository.save(task);
     }
 
