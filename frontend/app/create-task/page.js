@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from 'react';
-import styles from '../create-task/CreateTask.module.css';
+import styles from '../styles/CreateTask.module.css';
 
 const CreateTask = () => {
   const [name, setName] = useState('');
@@ -7,7 +9,7 @@ const CreateTask = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${process.env.BACKEND_URL}/tasks`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, description })

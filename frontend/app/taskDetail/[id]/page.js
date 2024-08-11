@@ -1,10 +1,11 @@
-import { useRouter } from 'next/router';
+"use client";  
+
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import styles from '../task-details/TaskDetails.module.css';
+import styles from '../../styles/TaskDetails.module.css';
 
 const TaskDetails = () => {
-  const router = useRouter();
-  const { id } = router.query;
+  const { id } = useParams();  
   const [task, setTask] = useState(null);
 
   useEffect(() => {
